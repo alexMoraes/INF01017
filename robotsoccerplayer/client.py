@@ -1,5 +1,5 @@
 import sys
-sys.path.append("C:\\Users\\Alex\\Documents\\INF01017\\Trabalho 1")
+sys.path.append("C:\\Users\\Alex\\Documents\\INF01017")
 
 import math
 from robotsoccerplayer import Server

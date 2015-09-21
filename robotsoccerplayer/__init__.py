@@ -6,4 +6,5 @@
 
 from robotsoccerplayer.lib import Server
 from robotsoccerplayer.lib import Coord
-#from robotsoccerplayer.client import SoccerClient
+from robotsoccerplayer.client import Match
+from robotsoccerplayer.client import Robot

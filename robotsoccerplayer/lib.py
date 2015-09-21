@@ -51,16 +51,16 @@ class Coord(object):
         self.y = y
 
     def __str__(self):
-        return 'C('+str(self.x)+', '+str(self.y)+')'
+        return 'Coord('+str(self.x)+', '+str(self.y)+')'
 
     def __repr__(self):
         return str(self)
 
     def __sub__(self, o):
-        return C(self.x-o.x, self.y-o.y)
+        return Coord(self.x-o.x, self.y-o.y)
     
     def __add__(self, o):
-        return C(self.x+o.x, self.y+o.y)
+        return Coord(self.x+o.x, self.y+o.y)
 
     def angle(self):
         if self.x == 0 and self.y == 0:
