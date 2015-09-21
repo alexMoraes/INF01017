@@ -4,6 +4,6 @@
 # This module is part of robotsoccer-python and is released under 
 # the MIT  License: http://www.opensource.org/licenses/mit-license.php
 
-from robotsoccerplayer.lib import Connection
+from robotsoccerplayer.lib import Server
 from robotsoccerplayer.lib import Coord
 #from robotsoccerplayer.client import SoccerClient

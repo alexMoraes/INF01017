@@ -8,26 +8,26 @@ import math
 import socket
 from struct import pack, unpack
 
-class Connection(socket.socket):
+class Server(socket.socket):
     """
-    Socket interface for communication with robot soccer match simulator
+    Server interface for communication with robot soccer match simulator
     """
     def __init__(self):
-        super(Connection, self).__init__(type=socket.SOCK_STREAM)
+        super(Server, self).__init__(type=socket.SOCK_STREAM)
 
     def send_float(self, n):
         """
         Receive a string or a number and send via socket in specific float byte
         format
         """
-        super(Socket, self).send(pack('f', float(n)))
+        super(Server, self).send(pack('f', float(n)))
 
     def send_int(self, n):
         """
         Receive a string or a number and send via socket in specific int byte
         format
         """
-        super(Socket, self).send(pack('i', int(n)))
+        super(Server, self).send(pack('i', int(n)))
 
     def recv_int(self):
         """
