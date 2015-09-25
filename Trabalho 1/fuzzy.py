@@ -1,12 +1,25 @@
 import sys
 import os
-sys.path.append("C:\\Users\\Alex\\Documents\\INF01017")
+sys.path.append("C:\\Users\\apmoraes\\Downloads\\INF01017-matrix-interpreter")
+sys.path.append("C:\\Users\\apmoraes\\Downloads\\INF01017-matrix-interpreter\\Trabalho 1")
 
 import math
 import time
 from robotsoccerplayer import Coord
 from robotsoccerplayer import Robot
 from robotsoccerplayer import Match
+from fuzzy_inference_system import Variable
+from fuzzy_inference_system import Rule
+from fuzzy_inference_system import FuzzySystem
+
+PI = math.pi
+RIGHT = (-PI, -PI, -PI/2, 0)
+FRONT = (-PI/2, 0, 0, PI/2)
+LEFT = (0, PI/2, PI, PI)
+
+NEG = (-3, -3, -3, 0)
+ZER = (-0.2, 0, 0, 0.2)
+POS = (0, 3, 3, 3)
 
 class Player:
     """
@@ -18,32 +31,89 @@ class Player:
         """
         self.__match = Match()
         self.__match.start(host, port)
-        self.__fuzzy = Fuzzy()
+        
+        self.__variable = {
+            'ball_angle': Variable({'right': RIGHT, 'front': FRONT, 'left': LEFT}),
+            'target_angle': Variable({'right': RIGHT, 'front': FRONT, 'left': LEFT})
+            }
+                
+        output = Variable({'negative': NEG, 'zero': ZER, 'positive': POS})
+        
+        rules = [
+            Rule([
+                    self.__variable['ball_angle'].partition('right'),
+                    self.__variable['target_angle'].partition('right')
+                    ], output.partition('positive')),
+            Rule([
+                    self.__variable['ball_angle'].partition('right'),
+                    self.__variable['target_angle'].partition('front')
+                    ], output.partition('positive')),
+            Rule([
+                    self.__variable['ball_angle'].partition('right'),
+                    self.__variable['target_angle'].partition('left')
+                    ], output.partition('positive')),
+            Rule([
+                    self.__variable['ball_angle'].partition('front'),
+                    self.__variable['target_angle'].partition('right')
+                    ], output.partition('positive')),
+            Rule([
+                    self.__variable['ball_angle'].partition('front'),
+                    self.__variable['target_angle'].partition('front')
+                    ], output.partition('positive')),
+            Rule([
+                    self.__variable['ball_angle'].partition('front'),
+                    self.__variable['target_angle'].partition('left')
+                    ], output.partition('positive')),
+            Rule([
+                    self.__variable['ball_angle'].partition('left'),
+                    self.__variable['target_angle'].partition('right')
+                    ], output.partition('positive')),
+            Rule([
+                    self.__variable['ball_angle'].partition('left'),
+                    self.__variable['target_angle'].partition('front')
+                    ], output.partition('positive')),
+            Rule([
+                    self.__variable['ball_angle'].partition('left'),
+                    self.__variable['target_angle'].partition('left')
+                    ], output.partition('positive')),
+            ]
+                
+        self.__fis = FuzzySystem(rules, output)
 
     def play(self):
         """
         Play using fuzzy controller
         """
         i = 0
-        fuzzy = self.__fuzzy
+        fuzzy = self.__fis
+        variable = self.__variable
         match = self.__match
         while(i < 1e4):
-            fuzzy.update(match)
-            action = fuzzy.get_action()
-            #print(action)
-            match.act(action[0], action[1])
-            #print(self.match.get_spin())
-            #time.sleep(1)
+            variable['ball_angle'].value = match.get_ball_angle()
+            variable['target_angle'].value = match.get_target_angle()
+            left_wheel = fuzzy.output()
+            match.act(left_wheel, 3)
+            input(left_wheel)
+		
+		
+		
+            # fuzzy.update(match)
+            # action = fuzzy.get_action()
+            # #print(action)
+            # match.act(action[0], action[1])
+            # #print(self.match.get_spin())
+            # #time.sleep(1)
             i += 1
+			
 
-PI = math.pi
-RIGHT = (-PI, -PI, -PI/2, 0)
-FRONT = (-PI/2, 0, 0, PI/2)
-LEFT = (0, PI/2, PI, PI)
+# PI = math.pi
+# RIGHT = (-PI, -PI, -PI/2, 0)
+# FRONT = (-PI/2, 0, 0, PI/2)
+# LEFT = (0, PI/2, PI, PI)
 
-NEG_SPIN = (-PI, -PI, -0.2, 0)
-NTR_SPIN = (-0.2, 0, 0, 0.2)
-POS_SPIN = (0, 0.5, PI, PI)
+# NEG_SPIN = (-PI, -PI, -0.2, 0)
+# NTR_SPIN = (-0.2, 0, 0, 0.2)
+# POS_SPIN = (0, 0.5, PI, PI)
 
 class Fuzzy:
     def __init__(self):

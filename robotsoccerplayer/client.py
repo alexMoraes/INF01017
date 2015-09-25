@@ -134,7 +134,7 @@ class Match:
         """
         robot = self.get_own_robot()
         goal = self.get_own_goal()
-        alpha = (goal-self.ball).angle() - (self.ball-robot.pos).angle()
+        alpha = (goal - robot.pos).angle() - robot.angle
         return self.__adjust_angle(alpha)
 
     def get_obstacle_angle(self):
