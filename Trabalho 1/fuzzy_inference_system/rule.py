@@ -46,6 +46,9 @@ class RuleGenerator:
                 return Rule(antecedents, consequent)
 
         def make(self, inputs, output):
+                if(len(inputs) is not len(self.__input)):
+                   raise RuntimeError('Rule antecedents doesn\'t match number of variables')
+                   
                 antecedents = []
                 for index, var in enumerate(self.__input):
                         antecedents.append(var.partition(inputs[index]))
