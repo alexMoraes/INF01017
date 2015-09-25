@@ -1,15 +1,20 @@
 import sys
 sys.path.append("C:\\Users\\apmoraes\\Downloads\\INF01017-matrix-interpreter\\Trabalho 1")
 
-#from fuzzy_inference_system import Variable
-
 class Partition:
         """
         Represents a fuzzy partition of a given variable
         """
-        def __init__(self, var, partition_params):
+        def __init__(self, var, partition_params, name = ''):
+                self.name = name
                 self.__var = var
                 self.__params = partition_params
+
+        def __str__(self):
+                return self.name
+
+        def __repr__(self):
+                return self.name
 		
         def __trapezium(self, point):
                 """

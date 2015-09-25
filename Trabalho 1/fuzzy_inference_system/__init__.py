@@ -2,3 +2,4 @@ from fuzzy_inference_system.partition import Partition
 from fuzzy_inference_system.variable import Variable
 from fuzzy_inference_system.fuzzy_system import FuzzySystem
 from fuzzy_inference_system.rule import Rule
+from fuzzy_inference_system.rule import RuleGenerator

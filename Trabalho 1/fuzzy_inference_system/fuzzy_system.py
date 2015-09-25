@@ -8,7 +8,8 @@ class FuzzySystem:
         """
         Given a set of fuzzy rules, calculates an output relative of a set of input variables
         """
-        def __init__(self, rules, output):
+        def __init__(self, rules, output, name = ''):
+                self.__name = name
                 self.__rules = rules
                 self.__output = output
                 
@@ -20,10 +21,11 @@ class FuzzySystem:
                 alpha = {}
                 output = self.__output
                 for part_name in output.partitions:
-                        alpha[part_name] = - float('infinity')
+                        alpha[part_name] = 0
 
                 # Gets the maximum activation force for each output partition
                 for rule in self.__rules:
+                        part_name = rule.consequent.name
                         alpha[part_name] = max(alpha[part_name], rule.activation_force())
                         
                 # Calculate the output value using height method
@@ -31,6 +33,7 @@ class FuzzySystem:
                 denominator = 0
                 for part_name, value in alpha.items():
                         denominator += value
-                        nominator += value * output.partition(part_name).center()
+                        center = output.partition(part_name).center()
+                        nominator += value * center
 
-                return nominator/(denominator if denominator is not 0 else sys.float_info.min)
+                return nominator/denominator if denominator is not 0 else sys.float_info.min
