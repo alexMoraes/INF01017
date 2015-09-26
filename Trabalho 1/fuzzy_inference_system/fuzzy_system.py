@@ -13,7 +13,7 @@ class FuzzySystem:
                 self.__rules = rules
                 self.__output = output
                 
-        def output(self):
+        def update(self):
                 """
                 Calculates the output of the rule set given a set of variable values
                 """
@@ -36,4 +36,6 @@ class FuzzySystem:
                         center = output.partition(part_name).center()
                         nominator += value * center
 
-                return nominator/denominator if denominator is not 0 else sys.float_info.min
+                result = nominator/denominator if denominator is not 0 else 0
+                self.__output.value = result
+                return result
