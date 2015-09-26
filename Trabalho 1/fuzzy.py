@@ -34,7 +34,7 @@ FAR = (750, 1500, 2000, 2000)
 
 CLOCKWISE = (-4, -4, -0.5, 0)
 SPIN_ZERO = (-0.5, 0, 0, 0.5)
-ANTICLOCkWISE = (0, 0.5, 4, 4)
+ANTICLOCKWISE = (0, 0.5, 4, 4)
 
 class Player:
     """
@@ -277,216 +277,216 @@ class Player:
             ]
 
         left_wheel_spin_rules = [
-            left_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'negative'], 'negative') #1 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'zero'], 'zero')         #2 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'positive'], 'positive') #3 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'negative'], 'negative'), #1 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'zero'], 'zero'),         #2 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'positive'], 'positive'), #3 -> positive, negative
 
-            left_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'negative'], 'negative')        #4 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'zero'], 'zero')                #5 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'positive'], 'positive')        #6 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'negative'], 'negative'),        #4 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'zero'], 'zero'),                #5 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'positive'], 'positive'),        #6 -> positive, negative
 
-            left_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'negative'], 'negative')            #7 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'zero'], 'zero')                    #8 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'positive'], 'positive')            #9 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'negative'], 'negative'),            #7 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'zero'], 'zero'),                    #8 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'positive'], 'positive'),            #9 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'negative'], 'negative')        #10 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'zero'], 'zero')                #11 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'positive'], 'positive')        #12 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'negative'], 'negative'),        #10 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'zero'], 'zero'),                #11 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'positive'], 'positive'),        #12 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'negative'], 'negative') #13 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'zero'], 'zero')         #14 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'positive'], 'positive') #15 -> positive, negative
-
-            ###
-            left_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'negative'], 'negative')        #16 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'zero'], 'zero')                #17 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'positive'], 'positive')        #18 -> positive, negative
-            
-            left_wheel_spin_rule_maker.make(['negative', 'negative', 'negative'], 'negative')               #19 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative', 'negative', 'zero'], 'zero')                       #20 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative', 'negative', 'positive'], 'positive')               #21 -> positive, negative
-            
-            left_wheel_spin_rule_maker.make(['negative', 'zero', 'negative'], 'negative')                   #22 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative', 'zero', 'zero'], 'zero')                           #23 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative', 'zero', 'positive'], 'positive')                   #24 -> positive, negative
-            
-            left_wheel_spin_rule_maker.make(['negative', 'positive', 'negative'], 'negative')               #25 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative', 'positive', 'zero'], 'zero')                       #26 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative', 'positive', 'positive'], 'positive')               #27 -> positive, negative
-            
-            left_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'negative'], 'negative')        #28 -> negative, positive
-            left_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'zero'], 'zero')                #29 -> zero, zero
-            left_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'positive'], 'positive')        #30 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'negative'], 'negative'), #13 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'zero'], 'zero'),         #14 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'positive'], 'positive'), #15 -> positive, negative
 
             ###
-            left_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'negative'], 'negative')            #31 -> negative, positive
-            left_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'zero'], 'zero')                    #32 -> zero, zero
-            left_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'positive'], 'positive')            #33 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'negative'], 'negative'),        #16 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'zero'], 'zero'),                #17 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'positive'], 'positive'),        #18 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['zero', 'negative', 'negative'], 'negative')                   #34 -> negative, positive
-            left_wheel_spin_rule_maker.make(['zero', 'negative', 'zero'], 'zero')                           #35 -> zero, zero
-            left_wheel_spin_rule_maker.make(['zero', 'negative', 'positive'], 'positive')                   #36 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative', 'negative', 'negative'], 'negative'),               #19 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative', 'negative', 'zero'], 'zero'),                       #20 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative', 'negative', 'positive'], 'positive'),               #21 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['zero', 'zero', 'negative'], 'negative')                       #37 -> negative, positive
-            left_wheel_spin_rule_maker.make(['zero', 'zero', 'zero'], 'zero')                               #38 -> zero, zero
-            left_wheel_spin_rule_maker.make(['zero', 'zero', 'positive'], 'positive')                       #39 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative', 'zero', 'negative'], 'negative'),                   #22 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative', 'zero', 'zero'], 'zero'),                           #23 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative', 'zero', 'positive'], 'positive'),                   #24 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['zero', 'positive', 'negative'], 'negative')                   #40 -> negative, positive
-            left_wheel_spin_rule_maker.make(['zero', 'positive', 'zero'], 'zero')                           #41 -> zero, zero
-            left_wheel_spin_rule_maker.make(['zero', 'positive', 'positive'], 'positive')                   #42 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative', 'positive', 'negative'], 'negative'),               #25 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative', 'positive', 'zero'], 'zero'),                       #26 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative', 'positive', 'positive'], 'positive'),               #27 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'negative'], 'negative')            #43 -> negative, positive
-            left_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'zero'], 'zero')                    #44 -> zero, zero
-            left_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'positive'], 'positive')            #45 -> positive, negative
+            left_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'negative'], 'negative'),        #28 -> negative, positive
+            left_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'zero'], 'zero'),                #29 -> zero, zero
+            left_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'positive'], 'positive'),        #30 -> positive, negative
 
             ###
-            left_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'negative'], 'negative')        #46 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'zero'], 'zero')                #47 -> zero, zero
-            left_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'positive'], 'positive')        #48 -> positive, negative
+            left_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'negative'], 'negative'),            #31 -> negative, positive
+            left_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'zero'], 'zero'),                    #32 -> zero, zero
+            left_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'positive'], 'positive'),            #33 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['positive', 'negative', 'negative'], 'negative')               #46 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive', 'negative', 'zero'], 'zero')                       #47 -> zero, zero
-            left_wheel_spin_rule_maker.make(['positive', 'negative', 'positive'], 'positive')               #48 -> positive, negative
+            left_wheel_spin_rule_maker.make(['zero', 'negative', 'negative'], 'negative'),                   #34 -> negative, positive
+            left_wheel_spin_rule_maker.make(['zero', 'negative', 'zero'], 'zero'),                           #35 -> zero, zero
+            left_wheel_spin_rule_maker.make(['zero', 'negative', 'positive'], 'positive'),                   #36 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['positive', 'zero', 'negative'], 'negative')                   #49 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive', 'zero', 'zero'], 'zero')                           #50 -> zero, zero
-            left_wheel_spin_rule_maker.make(['positive', 'zero', 'positive'], 'positive')                   #51 -> positive, negative
+            left_wheel_spin_rule_maker.make(['zero', 'zero', 'negative'], 'negative'),                       #37 -> negative, positive
+            left_wheel_spin_rule_maker.make(['zero', 'zero', 'zero'], 'zero'),                               #38 -> zero, zero
+            left_wheel_spin_rule_maker.make(['zero', 'zero', 'positive'], 'positive'),                       #39 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['positive', 'positive', 'negative'], 'negative')               #52 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive', 'positive', 'zero'], 'zero')                       #53 -> zero, zero
-            left_wheel_spin_rule_maker.make(['positive', 'positive', 'positive'], 'positive')               #54 -> positive, negative
+            left_wheel_spin_rule_maker.make(['zero', 'positive', 'negative'], 'negative'),                   #40 -> negative, positive
+            left_wheel_spin_rule_maker.make(['zero', 'positive', 'zero'], 'zero'),                           #41 -> zero, zero
+            left_wheel_spin_rule_maker.make(['zero', 'positive', 'positive'], 'positive'),                   #42 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'negative'], 'negative')        #55 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'zero'], 'zero')                #56 -> zero, zero
-            left_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'positive'], 'positive')        #57 -> positive, negative
+            left_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'negative'], 'negative'),            #43 -> negative, positive
+            left_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'zero'], 'zero'),                    #44 -> zero, zero
+            left_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'positive'], 'positive'),            #45 -> positive, negative
+
+            ###
+            left_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'negative'], 'negative'),        #46 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'zero'], 'zero'),                #47 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'positive'], 'positive'),        #48 -> positive, negative
+            
+            left_wheel_spin_rule_maker.make(['positive', 'negative', 'negative'], 'negative'),               #46 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive', 'negative', 'zero'], 'zero'),                       #47 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive', 'negative', 'positive'], 'positive'),               #48 -> positive, negative
+            
+            left_wheel_spin_rule_maker.make(['positive', 'zero', 'negative'], 'negative'),                   #49 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive', 'zero', 'zero'], 'zero'),                           #50 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive', 'zero', 'positive'], 'positive'),                   #51 -> positive, negative
+            
+            left_wheel_spin_rule_maker.make(['positive', 'positive', 'negative'], 'negative'),               #52 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive', 'positive', 'zero'], 'zero'),                       #53 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive', 'positive', 'positive'], 'positive'),               #54 -> positive, negative
+            
+            left_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'negative'], 'negative'),        #55 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'zero'], 'zero'),                #56 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'positive'], 'positive'),        #57 -> positive, negative
             
 
             ###
-            left_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'negative'], 'negative') #58 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'zero'], 'zero')         #59 -> zero, zero
-            left_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'positive'], 'positive') #60 -> positive, negative
+            left_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'negative'], 'negative'), #58 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'zero'], 'zero'),         #59 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'positive'], 'positive'), #60 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'negative'], 'negative')        #61 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'zero'], 'zero')                #62 -> zero, zero
-            left_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'positive'], 'positive')        #63 -> positive, negative
+            left_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'negative'], 'negative'),        #61 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'zero'], 'zero'),                #62 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'positive'], 'positive'),        #63 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'negative'], 'negative')            #64 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'zero'], 'zero')                    #65 -> zero, zero
-            left_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'positive'], 'positive')            #66 -> positive, negative
+            left_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'negative'], 'negative'),            #64 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'zero'], 'zero'),                    #65 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'positive'], 'positive'),            #66 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'negative'], 'negative')        #67 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'zero'], 'zero')                #68 -> zero, zero
-            left_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'positive'], 'positive')        #69 -> positive, negative
+            left_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'negative'], 'negative'),        #67 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'zero'], 'zero'),                #68 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'positive'], 'positive'),        #69 -> positive, negative
             
-            left_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'negative'], 'negative') #70 -> negative, positive
-            left_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'zero'], 'zero')         #71 -> zero, zero
+            left_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'negative'], 'negative'), #70 -> negative, positive
+            left_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'zero'], 'zero'),         #71 -> zero, zero
             left_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'positive'], 'positive') #72 -> positive, negative
             ]
 
         right_wheel_spin_rules = [
-            right_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'negative'], 'positive') #1 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'zero'], 'zero')         #2 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'positive'], 'negative') #3 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'negative'], 'positive'), #1 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'zero'], 'zero'),         #2 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative_strong', 'negative_strong', 'positive'], 'negative'), #3 -> positive, negative
 
-            right_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'negative'], 'positive')        #4 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'zero'], 'zero')                #5 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'positive'], 'negative')        #6 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'negative'], 'positive'),        #4 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'zero'], 'zero'),                #5 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative_strong', 'negative', 'positive'], 'negative'),        #6 -> positive, negative
 
-            right_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'negative'], 'positive')            #7 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'zero'], 'zero')                    #8 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'positive'], 'negative')            #9 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'negative'], 'positive'),            #7 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'zero'], 'zero'),                    #8 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative_strong', 'zero', 'positive'], 'negative'),            #9 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'negative'], 'positive')        #10 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'zero'], 'zero')                #11 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'positive'], 'negative')        #12 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'negative'], 'positive'),        #10 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'zero'], 'zero'),                #11 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative_strong', 'positive', 'positive'], 'negative'),        #12 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'negative'], 'positive') #13 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'zero'], 'zero')         #14 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'positive'], 'negative') #15 -> positive, negative
-
-            ###
-            right_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'negative'], 'positive')        #16 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'zero'], 'zero')                #17 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'positive'], 'negative')        #18 -> positive, negative
-            
-            right_wheel_spin_rule_maker.make(['negative', 'negative', 'negative'], 'positive')               #19 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative', 'negative', 'zero'], 'zero')                       #20 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative', 'negative', 'positive'], 'negative')               #21 -> positive, negative
-            
-            right_wheel_spin_rule_maker.make(['negative', 'zero', 'negative'], 'positive')                   #22 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative', 'zero', 'zero'], 'zero')                           #23 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative', 'zero', 'positive'], 'negative')                   #24 -> positive, negative
-            
-            right_wheel_spin_rule_maker.make(['negative', 'positive', 'negative'], 'positive')               #25 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative', 'positive', 'zero'], 'zero')                       #26 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative', 'positive', 'positive'], 'negative')               #27 -> positive, negative
-            
-            right_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'negative'], 'positive')        #28 -> negative, positive
-            right_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'zero'], 'zero')                #29 -> zero, zero
-            right_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'positive'], 'negative')        #30 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'negative'], 'positive'), #13 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'zero'], 'zero'),         #14 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative_strong', 'positive_strong', 'positive'], 'negative'), #15 -> positive, negative
 
             ###
-            right_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'negative'], 'positive')            #31 -> negative, positive
-            right_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'zero'], 'zero')                    #32 -> zero, zero
-            right_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'positive'], 'negative')            #33 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'negative'], 'positive'),        #16 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'zero'], 'zero'),                #17 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative', 'negative_strong', 'positive'], 'negative'),        #18 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['zero', 'negative', 'negative'], 'positive')                   #34 -> negative, positive
-            right_wheel_spin_rule_maker.make(['zero', 'negative', 'zero'], 'zero')                           #35 -> zero, zero
-            right_wheel_spin_rule_maker.make(['zero', 'negative', 'positive'], 'negative')                   #36 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative', 'negative', 'negative'], 'positive'),               #19 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative', 'negative', 'zero'], 'zero'),                       #20 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative', 'negative', 'positive'], 'negative'),               #21 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['zero', 'zero', 'negative'], 'positive')                       #37 -> negative, positive
-            right_wheel_spin_rule_maker.make(['zero', 'zero', 'zero'], 'zero')                               #38 -> zero, zero
-            right_wheel_spin_rule_maker.make(['zero', 'zero', 'positive'], 'negative')                       #39 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative', 'zero', 'negative'], 'positive'),                   #22 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative', 'zero', 'zero'], 'zero'),                           #23 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative', 'zero', 'positive'], 'negative'),                   #24 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['zero', 'positive', 'negative'], 'positive')                   #40 -> negative, positive
-            right_wheel_spin_rule_maker.make(['zero', 'positive', 'zero'], 'zero')                           #41 -> zero, zero
-            right_wheel_spin_rule_maker.make(['zero', 'positive', 'positive'], 'negative')                   #42 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative', 'positive', 'negative'], 'positive'),               #25 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative', 'positive', 'zero'], 'zero'),                       #26 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative', 'positive', 'positive'], 'negative'),               #27 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'negative'], 'positive')            #43 -> negative, positive
-            right_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'zero'], 'zero')                    #44 -> zero, zero
-            right_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'positive'], 'negative')            #45 -> positive, negative
+            right_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'negative'], 'positive'),        #28 -> negative, positive
+            right_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'zero'], 'zero'),                #29 -> zero, zero
+            right_wheel_spin_rule_maker.make(['negative', 'positive_strong', 'positive'], 'negative'),        #30 -> positive, negative
 
             ###
-            right_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'negative'], 'positive')        #46 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'zero'], 'zero')                #47 -> zero, zero
-            right_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'positive'], 'negative')        #48 -> positive, negative
+            right_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'negative'], 'positive'),            #31 -> negative, positive
+            right_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'zero'], 'zero'),                    #32 -> zero, zero
+            right_wheel_spin_rule_maker.make(['zero', 'negative_strong', 'positive'], 'negative'),            #33 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['positive', 'negative', 'negative'], 'positive')               #46 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive', 'negative', 'zero'], 'zero')                       #47 -> zero, zero
-            right_wheel_spin_rule_maker.make(['positive', 'negative', 'positive'], 'negative')               #48 -> positive, negative
+            right_wheel_spin_rule_maker.make(['zero', 'negative', 'negative'], 'positive'),                   #34 -> negative, positive
+            right_wheel_spin_rule_maker.make(['zero', 'negative', 'zero'], 'zero'),                           #35 -> zero, zero
+            right_wheel_spin_rule_maker.make(['zero', 'negative', 'positive'], 'negative'),                   #36 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['positive', 'zero', 'negative'], 'positive')                   #49 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive', 'zero', 'zero'], 'zero')                           #50 -> zero, zero
-            right_wheel_spin_rule_maker.make(['positive', 'zero', 'positive'], 'negative')                   #51 -> positive, negative
+            right_wheel_spin_rule_maker.make(['zero', 'zero', 'negative'], 'positive'),                       #37 -> negative, positive
+            right_wheel_spin_rule_maker.make(['zero', 'zero', 'zero'], 'zero'),                               #38 -> zero, zero
+            right_wheel_spin_rule_maker.make(['zero', 'zero', 'positive'], 'negative'),                       #39 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['positive', 'positive', 'negative'], 'positive')               #52 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive', 'positive', 'zero'], 'zero')                       #53 -> zero, zero
-            right_wheel_spin_rule_maker.make(['positive', 'positive', 'positive'], 'negative')               #54 -> positive, negative
+            right_wheel_spin_rule_maker.make(['zero', 'positive', 'negative'], 'positive'),                   #40 -> negative, positive
+            right_wheel_spin_rule_maker.make(['zero', 'positive', 'zero'], 'zero'),                           #41 -> zero, zero
+            right_wheel_spin_rule_maker.make(['zero', 'positive', 'positive'], 'negative'),                   #42 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'negative'], 'positive')        #55 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'zero'], 'zero')                #56 -> zero, zero
-            right_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'positive'], 'negative')        #57 -> positive, negative
+            right_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'negative'], 'positive'),            #43 -> negative, positive
+            right_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'zero'], 'zero'),                    #44 -> zero, zero
+            right_wheel_spin_rule_maker.make(['zero', 'positive_strong', 'positive'], 'negative'),            #45 -> positive, negative
+
+            ###
+            right_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'negative'], 'positive'),        #46 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'zero'], 'zero'),                #47 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive', 'negative_strong', 'positive'], 'negative'),        #48 -> positive, negative
+            
+            right_wheel_spin_rule_maker.make(['positive', 'negative', 'negative'], 'positive'),               #46 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive', 'negative', 'zero'], 'zero'),                       #47 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive', 'negative', 'positive'], 'negative'),               #48 -> positive, negative
+            
+            right_wheel_spin_rule_maker.make(['positive', 'zero', 'negative'], 'positive'),                   #49 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive', 'zero', 'zero'], 'zero'),                           #50 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive', 'zero', 'positive'], 'negative'),                   #51 -> positive, negative
+            
+            right_wheel_spin_rule_maker.make(['positive', 'positive', 'negative'], 'positive'),               #52 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive', 'positive', 'zero'], 'zero'),                       #53 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive', 'positive', 'positive'], 'negative'),               #54 -> positive, negative
+            
+            right_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'negative'], 'positive'),        #55 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'zero'], 'zero'),                #56 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive', 'positive_strong', 'positive'], 'negative'),        #57 -> positive, negative
             
 
             ###
-            right_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'negative'], 'positive') #58 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'zero'], 'zero')         #59 -> zero, zero
-            right_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'positive'], 'negative') #60 -> positive, negative
+            right_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'negative'], 'positive'), #58 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'zero'], 'zero'),         #59 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive_strong', 'negative_strong', 'positive'], 'negative'), #60 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'negative'], 'positive')        #61 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'zero'], 'zero')                #62 -> zero, zero
-            right_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'positive'], 'negative')        #63 -> positive, negative
+            right_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'negative'], 'positive'),        #61 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'zero'], 'zero'),                #62 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive_strong', 'negative', 'positive'], 'negative'),        #63 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'negative'], 'positive')            #64 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'zero'], 'zero')                    #65 -> zero, zero
-            right_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'positive'], 'negative')            #66 -> positive, negative
+            right_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'negative'], 'positive'),            #64 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'zero'], 'zero'),                    #65 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive_strong', 'zero', 'positive'], 'negative'),            #66 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'negative'], 'positive')        #67 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'zero'], 'zero')                #68 -> zero, zero
-            right_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'positive'], 'negative')        #69 -> positive, negative
+            right_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'negative'], 'positive'),        #67 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'zero'], 'zero'),                #68 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive_strong', 'positive', 'positive'], 'negative'),        #69 -> positive, negative
             
-            right_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'negative'], 'positive') #70 -> negative, positive
-            right_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'zero'], 'zero')         #71 -> zero, zero
+            right_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'negative'], 'positive'), #70 -> negative, positive
+            right_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'zero'], 'zero'),         #71 -> zero, zero
             right_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'positive'], 'negative') #72 -> positive, negative
             ]
             
@@ -527,12 +527,13 @@ class Player:
             # Debug information
             for pname, part in variable['ball_distance'].partitions.items():
                 print(pname, part.membership())
+            print(variable['spin'].value)
             print('output:', left_wheel, right_wheel)
 
             # Act
             match.act(left_wheel, right_wheel)
             i += 1
-            #inp = input('')
+            input('')
 
 nargs = len(sys.argv) - 1
 if(nargs is 0):
