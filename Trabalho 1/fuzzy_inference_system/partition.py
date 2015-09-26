@@ -11,10 +11,10 @@ class Partition:
                 self.__params = partition_params
 
         def __str__(self):
-                return self.name
+                return self.name + ' = ' + str(self.membership())
 
         def __repr__(self):
-                return self.name
+                return self.__str__()
 		
         def __trapezium(self, point):
                 """
