@@ -17,10 +17,13 @@ class Variable:
                         self.partitions[part_name] = Partition(self, partitions[part_name], part_name)
 
         def __str__(self):
-                return self.__name
+                ret = self.__name + ':'
+                for part_name, part in self.partitions.items():
+                        ret += ' ' + str(part) + ';'
+                return ret
 
         def __repr__(self):
-                return self.__name
+                return self.__str__()
 
         def partition(self, name):
                 return self.partitions[name]
