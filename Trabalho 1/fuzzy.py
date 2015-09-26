@@ -58,6 +58,9 @@ class Player:
             'left_wheel': Variable({'negative_strong': NEG_ST, 'negative': NEG, 'negative_weak': NEG_WK, 'zero': ZER, 'positive_weak': POS_WK, 'positive': POS, 'positive_strong': POS_ST}, 'left_wheel'),
             'right_wheel': Variable({'negative_strong': NEG_ST, 'negative': NEG, 'negative_weak': NEG_WK, 'zero': ZER, 'positive_weak': POS_WK, 'positive': POS, 'positive_strong': POS_ST}, 'right_wheel'),
 
+            'left_correction': Variable({'negative_strong': NEG_ST, 'negative': NEG, 'negative_weak': NEG_WK, 'zero': ZER, 'positive_weak': POS_WK, 'positive': POS, 'positive_strong': POS_ST}, 'left_wheel'),
+            'right_correction': Variable({'negative_strong': NEG_ST, 'negative': NEG, 'negative_weak': NEG_WK, 'zero': ZER, 'positive_weak': POS_WK, 'positive': POS, 'positive_strong': POS_ST}, 'right_wheel'),
+
             'spin': Variable({'negative': CLOCKWISE, 'zero': SPIN_ZERO, 'positive': ANTICLOCKWISE}, 'spin')
             }
         
@@ -77,13 +80,13 @@ class Player:
             self.__variable['left_wheel'],
             self.__variable['right_wheel'],
             self.__variable['spin']
-            ], self.__variable['left_wheel'])
+            ], self.__variable['left_correction'])
 
         right_wheel_spin_rule_maker = RuleGenerator([
             self.__variable['left_wheel'],
             self.__variable['right_wheel'],
             self.__variable['spin']
-            ], self.__variable['right_wheel'])
+            ], self.__variable['right_correction'])
         
         left_wheel_rules = [
             left_wheel_rule_maker.make(['rear_right', 'rear_right', 'far'], 'positive'),       #1 -> positive weak - positive strong
@@ -487,33 +490,46 @@ class Player:
             right_wheel_spin_rule_maker.make(['positive_strong', 'positive_strong', 'positive'], 'negative') #72 -> positive, negative
             ]
             
-        self.__left_wheel_fis = FuzzySystem(left_wheel_rules, output, 'left')
-        self.__right_wheel_fis = FuzzySystem(right_wheel_rules, output, 'right')
+        self.__left_wheel_fis = FuzzySystem(left_wheel_rules, self.__variable['left_wheel'], 'left')
+        self.__right_wheel_fis = FuzzySystem(right_wheel_rules, self.__variable['right_wheel'], 'right')
+        self.__left_correction_fis = FuzzySystem(left_wheel_spin_rules, self.__variable['left_correction'], 'left_correction')
+        self.__right_correction_fis = FuzzySystem(right_wheel_spin_rules, self.__variable['right_correction'], 'right_correction')
 
     def play(self):
         """
         Play using fuzzy controller
         """
         i = 0
-        fuzzy_left = self.__left_wheel_fis
-        fuzzy_right = self.__right_wheel_fis
+        fuzzy_left_action = self.__left_wheel_fis
+        fuzzy_right_action = self.__right_wheel_fis
+        fuzzy_left_correction = self.__left_correction_fis
+        fuzzy_right_correction = self.__right_correction_fis
+        
         variable = self.__variable
         match = self.__match
         while(True):
+            # Gets updated environment values
             variable['ball_angle'].value = match.get_ball_angle()
             variable['target_angle'].value = match.get_target_angle()
             variable['ball_distance'].value = match.get_ball_distance()
-            left_wheel = fuzzy_left.output()
-            right_wheel = fuzzy_right.output()
-            spin = match.get_spin()
-            if(abs(spin) > 1):
-                left_wheel = 0
-                right_wheel = 0
-                print('stabilization mode. spin:', spin)
+            variable['spin'].value = match.get_spin()
 
+            # Updates fuzzy outputs
+            fuzzy_left_action.update()
+            fuzzy_right_action.update()
+            fuzzy_left_correction.update()
+            fuzzy_right_correction.update()
+
+            # Calculate final forces for each wheel
+            left_wheel = variable['left_wheel'].value + variable['left_correction'].value
+            right_wheel = variable['right_wheel'].value + variable['right_correction'].value
+
+            # Debug information
             for pname, part in variable['ball_distance'].partitions.items():
                 print(pname, part.membership())
             print('output:', left_wheel, right_wheel)
+
+            # Act
             match.act(left_wheel, right_wheel)
             i += 1
             #inp = input('')
