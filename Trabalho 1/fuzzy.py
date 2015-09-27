@@ -19,22 +19,25 @@ RIGHT = (-3*PI/4, -5*PI/8, -PI/4, 0)
 FRONT = (-PI/4, 0, 0, PI/4)
 LEFT = (0, PI/4, 5*PI/8, 3*PI/4)
 REAR_LEFT = (5*PI/8, 3*PI/4, PI, PI)
+##RIGHT = (-PI, -PI, -PI/2, 0)
+##FRONT = (-PI/2, 0, 0, PI/2)
+##LEFT = (0, PI/2, PI, PI)
 
-NEG_ST = (-10, -10, -8, -6)
-NEG = (-8, -6, -4, -2)
-NEG_WK = (-4, -2, -1, 0)
-ZER = (-1, 0, 0, 1)
-POS_WK = (0, 1, 2, 4)
-POS = (2, 4, 6, 8)
-POS_ST = (6, 8, 10, 10)
+NEG_ST = (-32, -32, -32, -16)
+NEG = (-32, -16, -8, -4)
+NEG_WK = (-8, -4, -2, -0)
+ZER = (-2, -0, 0, 2)
+POS_WK = (0, 2, 4, 8)
+POS = (4, 8, 16, 32)
+POS_ST = (16, 32, 32, 32)
 
 CLOSE = (0, 0, 80, 120)
 NEAR = (80, 120, 750, 1500)
 FAR = (750, 1500, 2000, 2000)
 
-CLOCKWISE = (-1, -1, -0.02, 0)
-SPIN_ZERO = (-0.02, 0, 0, 0.02)
-ANTICLOCKWISE = (0, 0.02, 1, 1)
+CLOCKWISE = (-4, -4, -0.1, 0)
+SPIN_ZERO = (-0.1, 0, 0, 0.1)
+ANTICLOCKWISE = (0, 0.1, 4, 4)
 
 class Player:
     """
@@ -89,191 +92,191 @@ class Player:
             ], self.__variable['right_correction'])
         
         left_wheel_rules = [
-            left_wheel_rule_maker.make(['rear_right', 'rear_right', 'far'], 'positive_strong'),       #1 -> positive weak - positive strong
-            left_wheel_rule_maker.make(['rear_right', 'right', 'far'], 'positive_strong'),            #2 -> positive weak - positive strong
-            left_wheel_rule_maker.make(['rear_right', 'front', 'far'], 'positive_strong'),            #3 -> positive weak - positive strong
-            left_wheel_rule_maker.make(['rear_right', 'left', 'far'], 'positive_strong'),      #4 -> positive strong - positive weak
-            left_wheel_rule_maker.make(['rear_right', 'rear_left', 'far'], 'positive_strong'), #5 -> positive strong - positive weak
+            left_wheel_rule_maker.make(['rear_right', 'rear_right', 'far'], 'zero'),             #1 -> negative, negative
+            left_wheel_rule_maker.make(['rear_right', 'right', 'far'], 'zero'),                  #2 -> negative, negative
+            left_wheel_rule_maker.make(['rear_right', 'front', 'far'], 'zero'),         #3 -> negative, negative
+            left_wheel_rule_maker.make(['rear_right', 'left', 'far'], 'zero'),        #4 -> negative, negative
+            left_wheel_rule_maker.make(['rear_right', 'rear_left', 'far'], 'zero'),   #5 -> negative, negative
 
-            left_wheel_rule_maker.make(['right', 'rear_right', 'far'], 'positive_strong'),     #6 -> positive strong - positive weak
-            left_wheel_rule_maker.make(['right', 'right', 'far'], 'positive_strong'),                 #7 -> negative weak - negative strong
-            left_wheel_rule_maker.make(['right', 'front', 'far'], 'positive_strong'),                 #8 -> negative weak - negative strong
-            left_wheel_rule_maker.make(['right', 'left', 'far'], 'positive_strong'),           #9 -> positive strong - positive
-            left_wheel_rule_maker.make(['right', 'rear_left', 'far'], 'positive_strong'),      #10 -> positive strong - positive
+            left_wheel_rule_maker.make(['right', 'rear_right', 'far'], 'zero'),       #6 -> positive_strong - positive_weak
+            left_wheel_rule_maker.make(['right', 'right', 'far'], 'zero'),                   #7 -> positive - negative
+            left_wheel_rule_maker.make(['right', 'front', 'far'], 'negative_weak'),            ##8 -> negative_weak, negative
+            left_wheel_rule_maker.make(['right', 'left', 'far'], 'zero'),             #9 -> positive strong - positive_weak
+            left_wheel_rule_maker.make(['right', 'rear_left', 'far'], 'zero'),        #10 -> positive strong - positive_weak
             
-            left_wheel_rule_maker.make(['front', 'rear_right', 'far'], 'positive_strong'), #11
-            left_wheel_rule_maker.make(['front', 'right', 'far'], 'positive_strong'), #12
-            left_wheel_rule_maker.make(['front', 'front', 'far'], 'positive_strong'), #13
-            left_wheel_rule_maker.make(['front', 'left', 'far'], 'positive_strong'), #14
-            left_wheel_rule_maker.make(['front', 'rear_left', 'far'], 'positive_strong'), #15
+            left_wheel_rule_maker.make(['front', 'rear_right', 'far'], 'zero'),              #11 -> positive - positive_strong
+            left_wheel_rule_maker.make(['front', 'right', 'far'], 'positive_weak'),                   ##12 -> positive_weak, positive
+            left_wheel_rule_maker.make(['front', 'front', 'far'], 'positive'),            ##13 -> positive, positive
+            left_wheel_rule_maker.make(['front', 'left', 'far'], 'zero'),             #14 -> positive_strong - positive
+            left_wheel_rule_maker.make(['front', 'rear_left', 'far'], 'zero'),        #15 -> positive_strong - positive
             
-            left_wheel_rule_maker.make(['left', 'rear_right', 'far'], 'positive_strong'), #16
-            left_wheel_rule_maker.make(['left', 'right', 'far'], 'positive_strong'), #17
-            left_wheel_rule_maker.make(['left', 'front', 'far'], 'positive_strong'), #18
-            left_wheel_rule_maker.make(['left', 'left', 'far'], 'positive_strong'), #19
-            left_wheel_rule_maker.make(['left', 'rear_left', 'far'], 'positive_strong'), #20
+            left_wheel_rule_maker.make(['left', 'rear_right', 'far'], 'zero'),          #16 -> positive_weak - positive_strong
+            left_wheel_rule_maker.make(['left', 'right', 'far'], 'zero'),               #17 -> positive_weak - positive_strong
+            left_wheel_rule_maker.make(['left', 'front', 'far'], 'zero'),             #18 -> negative_strong - negative_weak
+            left_wheel_rule_maker.make(['left', 'left', 'far'], 'zero'),                #19 -> negative_weak - positive_strong
+            left_wheel_rule_maker.make(['left', 'rear_left', 'far'], 'zero'),           #20 -> positive_weak - positive_strong
             
-            left_wheel_rule_maker.make(['rear_left', 'rear_right', 'far'], 'positive_strong'), #21
-            left_wheel_rule_maker.make(['rear_left', 'right', 'far'], 'positive_strong'), #22
-            left_wheel_rule_maker.make(['rear_left', 'front', 'far'], 'positive_strong'), #23
-            left_wheel_rule_maker.make(['rear_left', 'left', 'far'], 'positive_strong'), #24
-            left_wheel_rule_maker.make(['rear_left', 'rear_left', 'far'], 'positive_strong'), #25
-
-            ###
-            left_wheel_rule_maker.make(['rear_right', 'rear_right', 'near'], 'positive_strong'), #26
-            left_wheel_rule_maker.make(['rear_right', 'right', 'near'], 'positive_strong'), #27
-            left_wheel_rule_maker.make(['rear_right', 'front', 'near'], 'positive_strong'), #28
-            left_wheel_rule_maker.make(['rear_right', 'left', 'near'], 'positive_strong'), #29
-            left_wheel_rule_maker.make(['rear_right', 'rear_left', 'near'], 'positive_strong'), #30
-
-            left_wheel_rule_maker.make(['right', 'rear_right', 'near'], 'positive_strong'), #31
-            left_wheel_rule_maker.make(['right', 'right', 'near'], 'positive_strong'), #32
-            left_wheel_rule_maker.make(['right', 'front', 'near'], 'positive_strong'), #33
-            left_wheel_rule_maker.make(['right', 'left', 'near'], 'positive_strong'), #34
-            left_wheel_rule_maker.make(['right', 'rear_left', 'near'], 'positive_strong'), #135
-            
-            left_wheel_rule_maker.make(['front', 'rear_right', 'near'], 'positive_strong'), #36
-            left_wheel_rule_maker.make(['front', 'right', 'near'], 'positive_strong'), #37
-            left_wheel_rule_maker.make(['front', 'front', 'near'], 'positive_strong'), #38
-            left_wheel_rule_maker.make(['front', 'left', 'near'], 'positive_strong'), #39
-            left_wheel_rule_maker.make(['front', 'rear_left', 'near'], 'positive_strong'), #40
-            
-            left_wheel_rule_maker.make(['left', 'rear_right', 'near'], 'positive_strong'), #41
-            left_wheel_rule_maker.make(['left', 'right', 'near'], 'positive_strong'), #42
-            left_wheel_rule_maker.make(['left', 'front', 'near'], 'positive_strong'), #43
-            left_wheel_rule_maker.make(['left', 'left', 'near'], 'positive_strong'), #44
-            left_wheel_rule_maker.make(['left', 'rear_left', 'near'], 'positive_strong'), #45
-            
-            left_wheel_rule_maker.make(['rear_left', 'rear_right', 'near'], 'positive_strong'), #46
-            left_wheel_rule_maker.make(['rear_left', 'right', 'near'], 'positive_strong'), #47
-            left_wheel_rule_maker.make(['rear_left', 'front', 'near'], 'positive_strong'), #48
-            left_wheel_rule_maker.make(['rear_left', 'left', 'near'], 'positive_strong'), #49
-            left_wheel_rule_maker.make(['rear_left', 'rear_left', 'near'], 'positive_strong'), #50
+            left_wheel_rule_maker.make(['rear_left', 'rear_right', 'far'], 'zero'),              #21 -> zero, positive_strong
+            left_wheel_rule_maker.make(['rear_left', 'right', 'far'], 'zero'),                   #22 -> zero, positive_strong
+            left_wheel_rule_maker.make(['rear_left', 'front', 'far'], 'zero'),        #23 -> positive_strong, positive
+            left_wheel_rule_maker.make(['rear_left', 'left', 'far'], 'zero'),           #24 -> positive_weak, positive_strong
+            left_wheel_rule_maker.make(['rear_left', 'rear_left', 'far'], 'zero'),    #25 -> positive_strong, zero
 
             ###
-            left_wheel_rule_maker.make(['rear_right', 'rear_right', 'close'], 'positive_strong'), #51
-            left_wheel_rule_maker.make(['rear_right', 'right', 'close'], 'positive_strong'), #52
-            left_wheel_rule_maker.make(['rear_right', 'front', 'close'], 'positive_strong'), #53
-            left_wheel_rule_maker.make(['rear_right', 'left', 'close'], 'positive_strong'), #54
-            left_wheel_rule_maker.make(['rear_right', 'rear_left', 'close'], 'positive_strong'), #555
+            left_wheel_rule_maker.make(['rear_right', 'rear_right', 'near'], 'negative_weak'),            ##26 -> negative_weak, negative
+            left_wheel_rule_maker.make(['rear_right', 'right', 'near'], 'negative_weak'),                 ##27 -> negative_weak, negative
+            left_wheel_rule_maker.make(['rear_right', 'front', 'near'], 'zero'),        #28 -> negative_weak - positive_strong
+            left_wheel_rule_maker.make(['rear_right', 'left', 'near'], 'negative'),       ##29 -> negative, negative_weak
+            left_wheel_rule_maker.make(['rear_right', 'rear_left', 'near'], 'positive'),  ##30 -> positive, positive_weak
 
-            left_wheel_rule_maker.make(['right', 'rear_right', 'close'], 'positive_strong'), #56
-            left_wheel_rule_maker.make(['right', 'right', 'close'], 'positive_strong'), #57
-            left_wheel_rule_maker.make(['right', 'front', 'close'], 'positive_strong'), #58
-            left_wheel_rule_maker.make(['right', 'left', 'close'], 'positive_strong'), #59
-            left_wheel_rule_maker.make(['right', 'rear_left', 'close'], 'positive_strong'), #60
+            left_wheel_rule_maker.make(['right', 'rear_right', 'near'], 'positive'),      ##31 -> positive, positive_weak
+            left_wheel_rule_maker.make(['right', 'right', 'near'], 'positive'),                  ##32 -> positive, zero
+            left_wheel_rule_maker.make(['right', 'front', 'near'], 'negative_weak'),             ##33 -> negative_weak, negative
+            left_wheel_rule_maker.make(['right', 'left', 'near'], 'positive'),            ##34 -> positive, positive_weak
+            left_wheel_rule_maker.make(['right', 'rear_left', 'near'], 'positive'),       ##35 -> positive, positive_weak
             
-            left_wheel_rule_maker.make(['front', 'rear_right', 'close'], 'positive_strong'), #61
-            left_wheel_rule_maker.make(['front', 'right', 'close'], 'positive_strong'), #62
-            left_wheel_rule_maker.make(['front', 'front', 'close'], 'positive_strong'), #63
-            left_wheel_rule_maker.make(['front', 'left', 'close'], 'positive_strong'), #64
-            left_wheel_rule_maker.make(['front', 'rear_left', 'close'], 'positive_strong'), #65
+            left_wheel_rule_maker.make(['front', 'rear_right', 'near'], 'zero'),        #36 -> positive_weak - positive_strong
+            left_wheel_rule_maker.make(['front', 'right', 'near'], 'positive_weak'),             ##37 -> positive_weak, positive
+            left_wheel_rule_maker.make(['front', 'front', 'near'], 'positive'),           ##38 -> positive, positive
+            left_wheel_rule_maker.make(['front', 'left', 'near'], 'positive'),            ##39 -> positive, positive_weak
+            left_wheel_rule_maker.make(['front', 'rear_left', 'near'], 'zero'),       #40 -> positive_strong - positive_weak
             
-            left_wheel_rule_maker.make(['left', 'rear_right', 'close'], 'positive_strong'), #66
-            left_wheel_rule_maker.make(['left', 'right', 'close'], 'positive_strong'), #67
-            left_wheel_rule_maker.make(['left', 'front', 'close'], 'positive_strong'), #68
-            left_wheel_rule_maker.make(['left', 'left', 'close'], 'positive_strong'), #69
-            left_wheel_rule_maker.make(['left', 'rear_left', 'close'], 'positive_strong'), #70
+            left_wheel_rule_maker.make(['left', 'rear_right', 'near'], 'zero'),         ##41 -> zero, positive
+            left_wheel_rule_maker.make(['left', 'right', 'near'], 'positive_weak'),              ##42 -> positive_weak, positive
+            left_wheel_rule_maker.make(['left', 'front', 'near'], 'negative'),            ##43 -> negative, negative_weak
+            left_wheel_rule_maker.make(['left', 'left', 'near'], 'zero'),               ##44 -> zero, positive
+            left_wheel_rule_maker.make(['left', 'rear_left', 'near'], 'positive_weak'),          ##45 -> positive_weak, positive
             
-            left_wheel_rule_maker.make(['rear_left', 'rear_right', 'close'], 'positive_strong'), #71
-            left_wheel_rule_maker.make(['rear_left', 'right', 'close'], 'positive_strong'), #72
-            left_wheel_rule_maker.make(['rear_left', 'front', 'close'], 'positive_strong'), #73
-            left_wheel_rule_maker.make(['rear_left', 'left', 'close'], 'positive_strong'), #74
-            left_wheel_rule_maker.make(['rear_left', 'rear_left', 'close'], 'positive_strong'), #75
+            left_wheel_rule_maker.make(['rear_left', 'rear_right', 'near'], 'positive_weak'),             ##46 -> positive_weak, positive
+            left_wheel_rule_maker.make(['rear_left', 'right', 'near'], 'negative'),                  ##47 -> negative, positive
+            left_wheel_rule_maker.make(['rear_left', 'front', 'near'], 'zero'),         #48 -> negative_weak, positive_strong
+            left_wheel_rule_maker.make(['rear_left', 'left', 'near'], 'negative'),          ##49 -> negative, negative_weak
+            left_wheel_rule_maker.make(['rear_left', 'rear_left', 'near'], 'positive_weak'),   ##50 -> positive_weak, positive
+
+            ###
+            left_wheel_rule_maker.make(['rear_right', 'rear_right', 'close'], 'zero'),           #51 -> zero, positive_weak
+            left_wheel_rule_maker.make(['rear_right', 'right', 'close'], 'zero'),                #52 -> zero, positive_weak
+            left_wheel_rule_maker.make(['rear_right', 'front', 'close'], 'zero'),                #53 -> zero, positive_weak
+            left_wheel_rule_maker.make(['rear_right', 'left', 'close'], 'zero'),        #54 -> positive_weak, zero
+            left_wheel_rule_maker.make(['rear_right', 'rear_left', 'close'], 'zero'),   #55 -> positive_weak, zero
+
+            left_wheel_rule_maker.make(['right', 'rear_right', 'close'], 'positive_weak'),                ##56 -> positive_weak, zero
+            left_wheel_rule_maker.make(['right', 'right', 'close'], 'zero'),                     ##57 -> zero, negative_weak
+            left_wheel_rule_maker.make(['right', 'front', 'close'], 'zero'),                     ##58 -> zero, negative_weak
+            left_wheel_rule_maker.make(['right', 'left', 'close'], 'zero'),                      ##59 -> zero, negative_weak
+            left_wheel_rule_maker.make(['right', 'rear_left', 'close'], 'positive_weak'),        ##60 -> positive_weak, zero
+            
+            left_wheel_rule_maker.make(['front', 'rear_right', 'close'], 'zero'),       #61 -> positive_weak, zero
+            left_wheel_rule_maker.make(['front', 'right', 'close'], 'positive_weak'),            ##62 -> positive_weak, zero
+            left_wheel_rule_maker.make(['front', 'front', 'close'], 'positive'),                 ##63 -> positive, positive
+            left_wheel_rule_maker.make(['front', 'left', 'close'], 'zero'),                      ##64 -> zero, positive_weak
+            left_wheel_rule_maker.make(['front', 'rear_left', 'close'], 'positive'),                 ##65 -> positive, zero
+            
+            left_wheel_rule_maker.make(['left', 'rear_right', 'close'], 'zero'),                 ##66 -> zero, positive
+            left_wheel_rule_maker.make(['left', 'right', 'close'], 'positive'),             ##67 -> positive, positive_weak
+            left_wheel_rule_maker.make(['left', 'front', 'close'], 'negative_weak'),             ##68 -> negative_weak, zero
+            left_wheel_rule_maker.make(['left', 'left', 'close'], 'negative_weak'),              ##69 -> negative_weak, zero
+            left_wheel_rule_maker.make(['left', 'rear_left', 'close'], 'zero'),         ##70 -> zero, positive
+            
+            left_wheel_rule_maker.make(['rear_left', 'rear_right', 'close'], 'zero'),            #71 -> zero, positive_weak
+            left_wheel_rule_maker.make(['rear_left', 'right', 'close'], 'zero'),                 ##72 -> zero, positive
+            left_wheel_rule_maker.make(['rear_left', 'front', 'close'], 'zero'),        #73 -> positive_weak, zero
+            left_wheel_rule_maker.make(['rear_left', 'left', 'close'], 'zero'),         #74 -> positive_weak, zero
+            left_wheel_rule_maker.make(['rear_left', 'rear_left', 'close'], 'zero'),    #75 -> positive_weak, zero
             ]
 
         right_wheel_rules = [
-            right_wheel_rule_maker.make(['rear_right', 'rear_right', 'far'], 'positive_strong'), #1 -> positive weak - positive strong
-            right_wheel_rule_maker.make(['rear_right', 'right', 'far'], 'positive_strong'),      #2 -> positive weak - positive strong
-            right_wheel_rule_maker.make(['rear_right', 'front', 'far'], 'positive_strong'),      #3 -> positive weak - positive strong
-            right_wheel_rule_maker.make(['rear_right', 'left', 'far'], 'positive_strong'),         #4 -> positive strong - positive weak
-            right_wheel_rule_maker.make(['rear_right', 'rear_left', 'far'], 'positive_strong'),    #5 -> positive strong - positive weak
+            right_wheel_rule_maker.make(['rear_right', 'rear_right', 'far'], 'zero'),             #1 ->  -> negative, negative
+            right_wheel_rule_maker.make(['rear_right', 'right', 'far'], 'zero'),                  #2 -> negative, negative
+            right_wheel_rule_maker.make(['rear_right', 'front', 'far'], 'zero'),         #3 -> negative, negative
+            right_wheel_rule_maker.make(['rear_right', 'left', 'far'], 'zero'),        #4 -> negative, negative
+            right_wheel_rule_maker.make(['rear_right', 'rear_left', 'far'], 'zero'),   #5 -> negative, negative
 
-            right_wheel_rule_maker.make(['right', 'rear_right', 'far'], 'positive_strong'),        #6 -> positive strong - positive weak
-            right_wheel_rule_maker.make(['right', 'right', 'far'], 'positive_strong'),           #7 -> negative weak - negative strong
-            right_wheel_rule_maker.make(['right', 'front', 'far'], 'positive_strong'),           #8 -> negative weak - negative strong
-            right_wheel_rule_maker.make(['right', 'left', 'far'], 'positive_strong'),                   #9 -> positive strong - positive
-            right_wheel_rule_maker.make(['right', 'rear_left', 'far'], 'positive_strong'),              #10 -> positive strong - positive
+            right_wheel_rule_maker.make(['right', 'rear_right', 'far'], 'zero'),       #6 -> positive_strong - positive_weak
+            right_wheel_rule_maker.make(['right', 'right', 'far'], 'zero'),                   #7 -> positive - negative
+            right_wheel_rule_maker.make(['right', 'front', 'far'], 'negative'),            ##8 -> negative_weak, negative
+            right_wheel_rule_maker.make(['right', 'left', 'far'], 'zero'),             #9 -> positive strong - positive_weak
+            right_wheel_rule_maker.make(['right', 'rear_left', 'far'], 'zero'),        #10 -> positive strong - positive_weak
             
-            right_wheel_rule_maker.make(['front', 'rear_right', 'far'], 'positive_strong'), #11
-            right_wheel_rule_maker.make(['front', 'right', 'far'], 'positive_strong'), #12
-            right_wheel_rule_maker.make(['front', 'front', 'far'], 'positive_strong'), #13
-            right_wheel_rule_maker.make(['front', 'left', 'far'], 'positive_strong'), #14
-            right_wheel_rule_maker.make(['front', 'rear_left', 'far'], 'positive_strong'), #15
+            right_wheel_rule_maker.make(['front', 'rear_right', 'far'], 'zero'),              #11 -> positive - positive_strong
+            right_wheel_rule_maker.make(['front', 'right', 'far'], 'positive'),                   ##12 -> positive_weak, positive
+            right_wheel_rule_maker.make(['front', 'front', 'far'], 'positive'),            ##13 -> positive, positive
+            right_wheel_rule_maker.make(['front', 'left', 'far'], 'zero'),             #14 -> positive_strong - positive
+            right_wheel_rule_maker.make(['front', 'rear_left', 'far'], 'zero'),        #15 -> positive_strong - positive
             
-            right_wheel_rule_maker.make(['left', 'rear_right', 'far'], 'positive_strong'), #16
-            right_wheel_rule_maker.make(['left', 'right', 'far'], 'positive_strong'), #17
-            right_wheel_rule_maker.make(['left', 'front', 'far'], 'positive_strong'), #18
-            right_wheel_rule_maker.make(['left', 'left', 'far'], 'positive_strong'), #19
-            right_wheel_rule_maker.make(['left', 'rear_left', 'far'], 'positive_strong'), #20
+            right_wheel_rule_maker.make(['left', 'rear_right', 'far'], 'zero'),          #16 -> positive_weak - positive_strong
+            right_wheel_rule_maker.make(['left', 'right', 'far'], 'zero'),               #17 -> positive_weak - positive_strong
+            right_wheel_rule_maker.make(['left', 'front', 'far'], 'zero'),             #18 -> negative_strong - negative_weak
+            right_wheel_rule_maker.make(['left', 'left', 'far'], 'zero'),                #19 -> negative_weak - positive_strong
+            right_wheel_rule_maker.make(['left', 'rear_left', 'far'], 'zero'),           #20 -> positive_weak - positive_strong
             
-            right_wheel_rule_maker.make(['rear_left', 'rear_right', 'far'], 'positive_strong'), #21
-            right_wheel_rule_maker.make(['rear_left', 'right', 'far'], 'positive_strong'), #22
-            right_wheel_rule_maker.make(['rear_left', 'front', 'far'], 'positive_strong'), #23
-            right_wheel_rule_maker.make(['rear_left', 'left', 'far'], 'positive_strong'), #24
-            right_wheel_rule_maker.make(['rear_left', 'rear_left', 'far'], 'positive_strong'), #25
-
-            ###
-            right_wheel_rule_maker.make(['rear_right', 'rear_right', 'near'], 'positive_strong'), #26
-            right_wheel_rule_maker.make(['rear_right', 'right', 'near'], 'positive_strong'), #27
-            right_wheel_rule_maker.make(['rear_right', 'front', 'near'], 'positive_strong'), #28
-            right_wheel_rule_maker.make(['rear_right', 'left', 'near'], 'positive_strong'), #29
-            right_wheel_rule_maker.make(['rear_right', 'rear_left', 'near'], 'positive_strong'), #30
-
-            right_wheel_rule_maker.make(['right', 'rear_right', 'near'], 'positive_strong'), #31
-            right_wheel_rule_maker.make(['right', 'right', 'near'], 'negative_strong'), #32
-            right_wheel_rule_maker.make(['right', 'front', 'near'], 'positive_strong'), #33
-            right_wheel_rule_maker.make(['right', 'left', 'near'], 'positive_strong'), #34
-            right_wheel_rule_maker.make(['right', 'rear_left', 'near'], 'positive_strong'), #135
-            
-            right_wheel_rule_maker.make(['front', 'rear_right', 'near'], 'positive_strong'), #36
-            right_wheel_rule_maker.make(['front', 'right', 'near'], 'positive_strong'), #37
-            right_wheel_rule_maker.make(['front', 'front', 'near'], 'positive_strong'), #38
-            right_wheel_rule_maker.make(['front', 'left', 'near'], 'positive_strong'), #39
-            right_wheel_rule_maker.make(['front', 'rear_left', 'near'], 'positive_strong'), #40
-            
-            right_wheel_rule_maker.make(['left', 'rear_right', 'near'], 'positive_strong'), #41
-            right_wheel_rule_maker.make(['left', 'right', 'near'], 'positive_strong'), #42
-            right_wheel_rule_maker.make(['left', 'front', 'near'], 'positive_strong'), #43
-            right_wheel_rule_maker.make(['left', 'left', 'near'], 'positive_strong'), #44
-            right_wheel_rule_maker.make(['left', 'rear_left', 'near'], 'positive_strong'), #45
-            
-            right_wheel_rule_maker.make(['rear_left', 'rear_right', 'near'], 'positive_strong'), #46
-            right_wheel_rule_maker.make(['rear_left', 'right', 'near'], 'positive_strong'), #47
-            right_wheel_rule_maker.make(['rear_left', 'front', 'near'], 'positive_strong'), #48
-            right_wheel_rule_maker.make(['rear_left', 'left', 'near'], 'positive_strong'), #49
-            right_wheel_rule_maker.make(['rear_left', 'rear_left', 'near'], 'positive_strong'), #50
+            right_wheel_rule_maker.make(['rear_left', 'rear_right', 'far'], 'zero'),              #21 -> zero, positive_strong
+            right_wheel_rule_maker.make(['rear_left', 'right', 'far'], 'zero'),                   #22 -> zero, positive_strong
+            right_wheel_rule_maker.make(['rear_left', 'front', 'far'], 'zero'),        #23 -> positive_strong, positive
+            right_wheel_rule_maker.make(['rear_left', 'left', 'far'], 'zero'),           #24 -> positive_weak, positive_strong
+            right_wheel_rule_maker.make(['rear_left', 'rear_left', 'far'], 'zero'),    #25 -> positive_strong, zero
 
             ###
-            right_wheel_rule_maker.make(['rear_right', 'rear_right', 'close'], 'positive_strong'), #51
-            right_wheel_rule_maker.make(['rear_right', 'right', 'close'], 'positive_strong'), #52
-            right_wheel_rule_maker.make(['rear_right', 'front', 'close'], 'positive_strong'), #53
-            right_wheel_rule_maker.make(['rear_right', 'left', 'close'], 'positive_strong'), #54
-            right_wheel_rule_maker.make(['rear_right', 'rear_left', 'close'], 'positive_strong'), #555
+            right_wheel_rule_maker.make(['rear_right', 'rear_right', 'near'], 'negative'),            ##26 -> negative_weak, negative
+            right_wheel_rule_maker.make(['rear_right', 'right', 'near'], 'negative'),                 ##27 -> negative_weak, negative
+            right_wheel_rule_maker.make(['rear_right', 'front', 'near'], 'zero'),        #28 -> negative_weak - positive_strong
+            right_wheel_rule_maker.make(['rear_right', 'left', 'near'], 'negative_weak'),       ##29 -> negative, negative_weak
+            right_wheel_rule_maker.make(['rear_right', 'rear_left', 'near'], 'positive_weak'),  ##30 -> positive, positive_weak
 
-            right_wheel_rule_maker.make(['right', 'rear_right', 'close'], 'positive_strong'), #56
-            right_wheel_rule_maker.make(['right', 'right', 'close'], 'positive_strong'), #57
-            right_wheel_rule_maker.make(['right', 'front', 'close'], 'positive_strong'), #58
-            right_wheel_rule_maker.make(['right', 'left', 'close'], 'positive_strong'), #59
-            right_wheel_rule_maker.make(['right', 'rear_left', 'close'], 'positive_strong'), #60
+            right_wheel_rule_maker.make(['right', 'rear_right', 'near'], 'positive_weak'),      ##31 -> positive, positive_weak
+            right_wheel_rule_maker.make(['right', 'right', 'near'], 'zero'),                  ##32 -> positive, zero
+            right_wheel_rule_maker.make(['right', 'front', 'near'], 'negative'),             ##33 -> negative_weak, negative
+            right_wheel_rule_maker.make(['right', 'left', 'near'], 'positive_weak'),            ##34 -> positive, positive_weak
+            right_wheel_rule_maker.make(['right', 'rear_left', 'near'], 'positive_weak'),       ##35 -> positive, positive_weak
             
-            right_wheel_rule_maker.make(['front', 'rear_right', 'close'], 'positive_strong'), #61
-            right_wheel_rule_maker.make(['front', 'right', 'close'], 'positive_strong'), #62
-            right_wheel_rule_maker.make(['front', 'front', 'close'], 'positive_strong'), #63
-            right_wheel_rule_maker.make(['front', 'left', 'close'], 'positive_strong'), #64
-            right_wheel_rule_maker.make(['front', 'rear_left', 'close'], 'positive_strong'), #65
+            right_wheel_rule_maker.make(['front', 'rear_right', 'near'], 'zero'),        #36 -> positive_weak - positive_strong
+            right_wheel_rule_maker.make(['front', 'right', 'near'], 'positive'),             ##37 -> positive_weak, positive
+            right_wheel_rule_maker.make(['front', 'front', 'near'], 'positive'),           ##38 -> positive, positive
+            right_wheel_rule_maker.make(['front', 'left', 'near'], 'positive_weak'),            ##39 -> positive, positive_weak
+            right_wheel_rule_maker.make(['front', 'rear_left', 'near'], 'zero'),       #40 -> positive_strong - positive_weak
             
-            right_wheel_rule_maker.make(['left', 'rear_right', 'close'], 'positive_strong'), #66
-            right_wheel_rule_maker.make(['left', 'right', 'close'], 'positive_strong'), #67
-            right_wheel_rule_maker.make(['left', 'front', 'close'], 'positive_strong'), #68
-            right_wheel_rule_maker.make(['left', 'left', 'close'], 'positive_strong'), #69
-            right_wheel_rule_maker.make(['left', 'rear_left', 'close'], 'positive_strong'), #70
+            right_wheel_rule_maker.make(['left', 'rear_right', 'near'], 'positive'),         ##41 -> zero, positive
+            right_wheel_rule_maker.make(['left', 'right', 'near'], 'positive'),              ##42 -> positive_weak, positive
+            right_wheel_rule_maker.make(['left', 'front', 'near'], 'negative_weak'),            ##43 -> negative, negative_weak
+            right_wheel_rule_maker.make(['left', 'left', 'near'], 'positive'),               ##44 -> zero, positive
+            right_wheel_rule_maker.make(['left', 'rear_left', 'near'], 'positive'),          ##45 -> positive_weak, positive
             
-            right_wheel_rule_maker.make(['rear_left', 'rear_right', 'close'], 'positive_strong'), #71
-            right_wheel_rule_maker.make(['rear_left', 'right', 'close'], 'positive_strong'), #72
-            right_wheel_rule_maker.make(['rear_left', 'front', 'close'], 'positive_strong'), #73
-            right_wheel_rule_maker.make(['rear_left', 'left', 'close'], 'positive_strong'), #74
-            right_wheel_rule_maker.make(['rear_left', 'rear_left', 'close'], 'positive_strong'), #75
+            right_wheel_rule_maker.make(['rear_left', 'rear_right', 'near'], 'positive'),             ##46 -> positive_weak, positive
+            right_wheel_rule_maker.make(['rear_left', 'right', 'near'], 'positive'),                  ##47 -> zero, positive
+            right_wheel_rule_maker.make(['rear_left', 'front', 'near'], 'zero'),         #48 -> negative_weak, positive_strong
+            right_wheel_rule_maker.make(['rear_left', 'left', 'near'], 'negative_weak'),          ##49 -> negative, negative_weak
+            right_wheel_rule_maker.make(['rear_left', 'rear_left', 'near'], 'positive'),   ##50 -> positive_weak, positive
+
+            ###
+            right_wheel_rule_maker.make(['rear_right', 'rear_right', 'close'], 'zero'),           #51 -> zero, positive_weak
+            right_wheel_rule_maker.make(['rear_right', 'right', 'close'], 'zero'),                #52 -> zero, positive_weak
+            right_wheel_rule_maker.make(['rear_right', 'front', 'close'], 'zero'),                #53 -> zero, positive_weak
+            right_wheel_rule_maker.make(['rear_right', 'left', 'close'], 'zero'),        #54 -> positive_weak, zero
+            right_wheel_rule_maker.make(['rear_right', 'rear_left', 'close'], 'zero'),   #55 -> positive_weak, zero
+
+            right_wheel_rule_maker.make(['right', 'rear_right', 'close'], 'zero'),       ##56 -> positive_weak, zero
+            right_wheel_rule_maker.make(['right', 'right', 'close'], 'negative_weak'),            ##57 -> zero, negative_weak
+            right_wheel_rule_maker.make(['right', 'front', 'close'], 'negative_weak'),            ##58 -> zero, negative_weak
+            right_wheel_rule_maker.make(['right', 'left', 'close'], 'negative_weak'),             ##59 -> zero, negative_weak
+            right_wheel_rule_maker.make(['right', 'rear_left', 'close'], 'zero'),             ##60 -> positive_weak, zero
+            
+            right_wheel_rule_maker.make(['front', 'rear_right', 'close'], 'zero'),       #61 -> positive_weak, zero
+            right_wheel_rule_maker.make(['front', 'right', 'close'], 'zero'),            ##62 -> positive_weak, zero
+            right_wheel_rule_maker.make(['front', 'front', 'close'], 'positive'),                 ##63 -> positive, positive
+            right_wheel_rule_maker.make(['front', 'left', 'close'], 'positive_weak'),                      ##64 -> zero, positive_weak
+            right_wheel_rule_maker.make(['front', 'rear_left', 'close'], 'zero'),                 ##65 -> positive, zero
+            
+            right_wheel_rule_maker.make(['left', 'rear_right', 'close'], 'positive'),                 ##66 -> zero, positive
+            right_wheel_rule_maker.make(['left', 'right', 'close'], 'positive_weak'),             ##67 -> positive, positive_weak
+            right_wheel_rule_maker.make(['left', 'front', 'close'], 'zero'),             ##68 -> negative_weak, zero
+            right_wheel_rule_maker.make(['left', 'left', 'close'], 'zero'),              ##69 -> negative_weak, zero
+            right_wheel_rule_maker.make(['left', 'rear_left', 'close'], 'positive'),         ##70 -> zero, positive
+            
+            right_wheel_rule_maker.make(['rear_left', 'rear_right', 'close'], 'zero'),            #71 -> zero, positive_weak
+            right_wheel_rule_maker.make(['rear_left', 'right', 'close'], 'positive'),                 ##72 -> zero, positive
+            right_wheel_rule_maker.make(['rear_left', 'front', 'close'], 'zero'),        #73 -> positive_weak, zero
+            right_wheel_rule_maker.make(['rear_left', 'left', 'close'], 'zero'),         #74 -> positive_weak, zero
+            right_wheel_rule_maker.make(['rear_left', 'rear_left', 'close'], 'zero'),    #75 -> positive_weak, zero ###
             ]
 
         left_wheel_spin_rules = [
@@ -543,7 +546,8 @@ class Player:
             # Act
             match.act(left_wheel, right_wheel)
             i += 1
-            input('')
+            if(abs(variable['left_wheel'].partition('zero').membership() - 1) < 1e-5 and abs(variable['right_wheel'].partition('zero').membership() - 1) < 1e-5):
+                input('')
 
 nargs = len(sys.argv) - 1
 if(nargs is 0):

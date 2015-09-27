@@ -17,9 +17,9 @@ class Variable:
                         self.partitions[part_name] = Partition(self, partitions[part_name], part_name)
 
         def __str__(self):
-                ret = self.__name + ':'
+                ret = '%s (%.2f):'%(self.__name, self.value)
                 for part_name, part in self.partitions.items():
-                        ret += ' ' + str(part) + ';'
+                        ret += ' %s;'%str(part)
                 return ret
 
         def __repr__(self):
