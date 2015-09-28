@@ -1,7 +1,12 @@
 import sys
 import os
-sys.path.append("C:\\Users\\Alex\\Documents\\INF01017")
-sys.path.append("C:\\Users\\Alex\\Documents\\INF01017\\Trabalho 1")
+import time
+directory = os.path.dirname(os.path.abspath(__file__))
+#print(directory)
+parent_directory = os.path.abspath(os.path.join(directory, os.pardir))
+#print(parent_directory)
+sys.path.append(directory)
+sys.path.append(parent_directory)
 
 import math
 import time
@@ -19,9 +24,15 @@ PI = math.pi
 ##FRONT = (-PI/4, 0, 0, PI/4)
 ##LEFT = (0, PI/4, 5*PI/8, 3*PI/4)
 ##REAR_LEFT = (5*PI/8, 3*PI/4, PI, PI)
-RIGHT = (-PI, -PI, -PI/2, 0)
-FRONT = (-PI/2, 0, 0, PI/2)
-LEFT = (0, PI/2, PI, PI)
+B_RRIGHT = (-PI, -PI, -3*PI/4, -PI/2)
+B_RIGHT = (-3*PI/4, -PI/2, -PI/2, 0)
+B_FRONT = (-PI/2, 0, 0, PI/2)
+B_LEFT = (0, PI/2, PI/2, 3*PI/4)
+B_RLEFT = (PI/2, 3*PI/4, PI, PI)
+
+T_RIGHT = (-PI, -PI, -PI/2, 0)
+T_FRONT = (-PI/2, 0, 0, PI/2)
+T_LEFT = (0, PI/2, PI, PI)
 
 ##NEG_ST = (-32, -32, -32, -16)
 ##NEG = (-32, -16, -8, -4)
@@ -59,8 +70,8 @@ class Player:
         print('Robot radius:', self.__match.robot_radius)
         
         self.__variable = {
-            'ball_angle': Variable({'right': RIGHT, 'front': FRONT, 'left': LEFT}, name = 'ball_angle'),
-            'target_angle': Variable({'right': RIGHT, 'front': FRONT, 'left': LEFT}, name = 'target_angle'),
+            'ball_angle': Variable({'rear_right': B_RRIGHT, 'right': B_RIGHT, 'front': B_FRONT, 'left': B_LEFT, 'rear_left': B_RLEFT}, name = 'ball_angle'),
+            'target_angle': Variable({'right': T_RIGHT, 'front': T_FRONT, 'left': T_LEFT}, name = 'target_angle'),
             'ball_distance': Variable({'close': CLOSE, 'near': NEAR, 'far': FAR}, 'ball_distance'),
             
             'left_wheel': Variable({'negative_strong': NST, 'negative': NEG, 'zero': ZER, 'positive': POS, 'positive_strong': PST}, 'left_wheel'),
@@ -82,6 +93,19 @@ class Player:
             ], self.__variable['right_wheel'])
         
         left_wheel_rules = [
+            left_wheel_rule_maker.make(['rear_right', 'right', 'negative'], 'negative'), #-9 -> negative, zero
+            left_wheel_rule_maker.make(['rear_right', 'right', 'zero'], 'zero'), #-8 -> zero, negative
+            left_wheel_rule_maker.make(['rear_right', 'right', 'positive'], 'positive'), #-7 -> positive, negative
+            
+            left_wheel_rule_maker.make(['rear_right', 'front', 'negative'], 'negative'), #-6 -> negative, zero
+            left_wheel_rule_maker.make(['rear_right', 'front', 'zero'], 'zero'), #-5 -> zero, negative
+            left_wheel_rule_maker.make(['rear_right', 'front', 'positive'], 'zero'),
+            
+            left_wheel_rule_maker.make(['rear_right', 'left', 'negative'], 'negative'), #-3 -> negative, zero
+            left_wheel_rule_maker.make(['rear_right', 'left', 'zero'], 'zero'), #-2 -> zero, negative
+            left_wheel_rule_maker.make(['rear_right', 'left', 'positive'], 'positive'), #-1 -> positive, negative
+
+            ###
             left_wheel_rule_maker.make(['right', 'right', 'negative'], 'positive'), #1 -> positive, zero
             left_wheel_rule_maker.make(['right', 'right', 'zero'], 'positive_strong'), #2 -> positive_strong, zero
             left_wheel_rule_maker.make(['right', 'right', 'positive'], 'positive_strong'), #3 -> positive_strong, negative
@@ -118,10 +142,36 @@ class Player:
             
             left_wheel_rule_maker.make(['left', 'left', 'negative'], 'negative'), #25 -> negative, positive_strong
             left_wheel_rule_maker.make(['left', 'left', 'zero'], 'zero'), #26 -> zero, positive_strong
-            left_wheel_rule_maker.make(['left', 'left', 'positive'], 'zero') #27 -> zero, positive
+            left_wheel_rule_maker.make(['left', 'left', 'positive'], 'zero'), #27 -> zero, positive
+
+            ###
+            left_wheel_rule_maker.make(['rear_left', 'right', 'negative'], 'negative'), #28 -> negative, positive
+            left_wheel_rule_maker.make(['rear_left', 'right', 'zero'], 'negative'), #29 -> negative, zero
+            left_wheel_rule_maker.make(['rear_left', 'right', 'positive'], 'zero'), #30 -> zero, negative
+            
+            left_wheel_rule_maker.make(['rear_left', 'front', 'negative'], 'zero'),
+            left_wheel_rule_maker.make(['rear_left', 'front', 'zero'], 'zero'),
+            left_wheel_rule_maker.make(['rear_left', 'front', 'positive'], 'zero'),
+            
+            left_wheel_rule_maker.make(['rear_left', 'left', 'negative'], 'negative'), #34 -> negative, positive
+            left_wheel_rule_maker.make(['rear_left', 'left', 'zero'], 'negative'), #35 -> negative, zero
+            left_wheel_rule_maker.make(['rear_left', 'left', 'positive'], 'zero'), #36 -> zero, negative
             ]
 
         right_wheel_rules = [
+            right_wheel_rule_maker.make(['rear_right', 'right', 'negative'], 'negative'), #-9 -> negative, zero
+            right_wheel_rule_maker.make(['rear_right', 'right', 'zero'], 'negative'), #-8 -> zero, negative
+            right_wheel_rule_maker.make(['rear_right', 'right', 'positive'], 'negative'), #-7 -> positive, negative
+            
+            right_wheel_rule_maker.make(['rear_right', 'front', 'negative'], 'zero'), #-6 -> negative, zero
+            right_wheel_rule_maker.make(['rear_right', 'front', 'zero'], 'negative'), #-5 -> zero, negative
+            right_wheel_rule_maker.make(['rear_right', 'front', 'positive'], 'zero'),
+            
+            right_wheel_rule_maker.make(['rear_right', 'left', 'negative'], 'zero'), #-3 -> negative, zero
+            right_wheel_rule_maker.make(['rear_right', 'left', 'zero'], 'negative'), #-2 -> zero, negative
+            right_wheel_rule_maker.make(['rear_right', 'left', 'positive'], 'negative'), #-1 -> positive, negative
+
+            ###
             right_wheel_rule_maker.make(['right', 'right', 'negative'], 'zero'), #1 -> positive, zero
             right_wheel_rule_maker.make(['right', 'right', 'zero'], 'zero'), #2 -> positive_strong, zero
             right_wheel_rule_maker.make(['right', 'right', 'positive'], 'negative'), #3 -> positive_strong, negative
@@ -158,7 +208,20 @@ class Player:
             
             right_wheel_rule_maker.make(['left', 'left', 'negative'], 'positive_strong'), #25 -> negative, positive_strong
             right_wheel_rule_maker.make(['left', 'left', 'zero'], 'positive_strong'), #26 -> zero, positive_strong
-            right_wheel_rule_maker.make(['left', 'left', 'positive'], 'positive') #27 -> zero, positive
+            right_wheel_rule_maker.make(['left', 'left', 'positive'], 'positive'), #27 -> zero, positive
+
+            ###
+            right_wheel_rule_maker.make(['rear_left', 'right', 'negative'], 'positive'), #28 -> negative, positive
+            right_wheel_rule_maker.make(['rear_left', 'right', 'zero'], 'zero'), #29 -> negative, zero
+            right_wheel_rule_maker.make(['rear_left', 'right', 'positive'], 'negative'), #30 -> zero, negative
+            
+            right_wheel_rule_maker.make(['rear_left', 'front', 'negative'], 'zero'),
+            right_wheel_rule_maker.make(['rear_left', 'front', 'zero'], 'zero'),
+            right_wheel_rule_maker.make(['rear_left', 'front', 'positive'], 'zero'),
+            
+            right_wheel_rule_maker.make(['rear_left', 'left', 'negative'], 'positive'), #34 -> negative, positive
+            right_wheel_rule_maker.make(['rear_left', 'left', 'zero'], 'zero'), #35 -> negative, zero
+            right_wheel_rule_maker.make(['rear_left', 'left', 'positive'], 'negative'), #36 -> zero, negative
             ]
             
         self.__left_wheel_fis = FuzzySystem(left_wheel_rules, self.__variable['left_wheel'], 'left')
@@ -206,6 +269,7 @@ class Player:
 
             # Act
             match.act(left_wheel, right_wheel)
+            #time.sleep(.1)
 
 nargs = len(sys.argv) - 1
 if(nargs is 0):
