@@ -2,9 +2,7 @@ import sys
 import os
 import time
 directory = os.path.dirname(os.path.abspath(__file__))
-#print(directory)
 parent_directory = os.path.abspath(os.path.join(directory, os.pardir))
-#print(parent_directory)
 sys.path.append(directory)
 sys.path.append(parent_directory)
 
@@ -17,6 +15,8 @@ from fuzzy_inference_system import Variable
 from fuzzy_inference_system import Rule
 from fuzzy_inference_system import RuleGenerator
 from fuzzy_inference_system import FuzzySystem
+
+DEBUG = False
 
 PI = math.pi
 ##REAR_RIGHT = (-PI, -PI, -3*PI/4, -5*PI/8)
@@ -252,7 +252,7 @@ class Player:
             right_wheel = variable['right_wheel'].value
 
             # Debug information
-            if(abs(variable['left_wheel'].partition('zero').membership() - 1) < 1e-5 and abs(variable['right_wheel'].partition('zero').membership() - 1) < 1e-5):
+            if(DEBUG and abs(variable['left_wheel'].partition('zero').membership() - 1) < 1e-5 and abs(variable['right_wheel'].partition('zero').membership() - 1) < 1e-5):
                 print('INPUTS:', '-----', sep = '\n')
                 print(variable['ball_angle'])
                 print(variable['target_angle'])
